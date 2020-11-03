@@ -19,8 +19,8 @@ class CelectCityFragment : Fragment(), View.OnClickListener {
     private lateinit var celectCityViewModel: CelectCityViewModel
     var button: Button? = null
     var button1: Button? = null
-    val APP_PREFERENCES = "WeatherApp"
-    val APP_PREFERENCES_CurrentCityPosition = ""
+    //val APP_PREFERENCES = "WeatherApp"
+    //val APP_PREFERENCES_CurrentCityPosition = ""
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -30,11 +30,10 @@ class CelectCityFragment : Fragment(), View.OnClickListener {
         celectCityViewModel = ViewModelProviders.of(this).get(CelectCityViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_selectcity, container, false)
 
-        var mSettings = activity?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-
+        /*var mSettings = activity?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
         var tempPosition = 0
         tempPosition = mSettings?.getInt(APP_PREFERENCES_CurrentCityPosition, 0)!!
-        selectCity_spinner.setSelection(tempPosition)
+        selectCity_spinner.setSelection(tempPosition.toInt())*/
 
         button1 = root.findViewById(R.id.button1) as Button
         button1!!.setOnClickListener(this)

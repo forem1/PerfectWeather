@@ -23,6 +23,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        val asd = BuildConfig.API_KEY
+        //val asd = BuildConfig.API_KEY
     }
 }

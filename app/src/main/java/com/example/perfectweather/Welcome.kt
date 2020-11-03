@@ -12,7 +12,7 @@ class Welcome : AppCompatActivity() {
 
     val APP_PREFERENCES = "WeatherApp"
     val APP_PREFERENCES_CurrentCity = ""
-    val APP_PREFERENCES_CurrentCityPosition = ""
+    //val APP_PREFERENCES_CurrentCityPosition = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,7 @@ class Welcome : AppCompatActivity() {
         Welcome_enter.setOnClickListener {
             val editor = mSettings.edit()
             editor.putString(APP_PREFERENCES_CurrentCity, Welcome_spinner.getSelectedItem().toString())
-            editor.putInt(APP_PREFERENCES_CurrentCityPosition, Welcome_spinner.getSelectedItemPosition())
+            //editor.putString(APP_PREFERENCES_CurrentCityPosition, Welcome_spinner.getSelectedItemPosition().toString())
             editor.commit()
 
             val intent = Intent(this, MainActivity::class.java)
