@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PerfectWeather</string>
+    <string name="title_home">Home</string>
+    <string name="title_SelectCity">Celect city</string>
+</resources>
