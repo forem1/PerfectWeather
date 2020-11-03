@@ -7,23 +7,34 @@
     tools:context=".Welcome">
 
     <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:id="@+id/Welcome_spinner"
+        android:layout_width="271dp"
+        android:layout_height="30dp"
+        android:entries="@array/CityNames"
+        app:layout_constraintBottom_toTopOf="@+id/Welcome_enter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></Spinner>
+        app:layout_constraintTop_toTopOf="parent">
+
+    </Spinner>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/Welcome_enter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="@string/Welcome_EnterButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="155dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="44dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
