@@ -19,7 +19,7 @@ class Welcome : AppCompatActivity() {
         setContentView(R.layout.activity_welcome)
 
         var mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-        textView.text = mSettings.getString(APP_PREFERENCES_CurrentCity, "")
+        textView.text = mSettings.getString(APP_PREFERENCES_CurrentCity, "") //test
 
         if(mSettings.getString(APP_PREFERENCES_CurrentCity, "") != "") {
             val intent = Intent(this, MainActivity::class.java)

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -19,8 +18,8 @@ class CelectCityFragment : Fragment(), View.OnClickListener {
     private lateinit var celectCityViewModel: CelectCityViewModel
     var button: Button? = null
     var button1: Button? = null
-    //val APP_PREFERENCES = "WeatherApp"
-    //val APP_PREFERENCES_CurrentCityPosition = ""
+    val APP_PREFERENCES = "WeatherApp"
+    val APP_PREFERENCES_CurrentCity = ""
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -30,10 +29,7 @@ class CelectCityFragment : Fragment(), View.OnClickListener {
         celectCityViewModel = ViewModelProviders.of(this).get(CelectCityViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_selectcity, container, false)
 
-        /*var mSettings = activity?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-        var tempPosition = 0
-        tempPosition = mSettings?.getInt(APP_PREFERENCES_CurrentCityPosition, 0)!!
-        selectCity_spinner.setSelection(tempPosition.toInt())*/
+        //val likedCities = arrayOf("Москва")
 
         button1 = root.findViewById(R.id.button1) as Button
         button1!!.setOnClickListener(this)
@@ -47,6 +43,10 @@ class CelectCityFragment : Fragment(), View.OnClickListener {
     override fun onClick(root: View?) {
         if(translateIdToIndex(root!!.id) == 1) {
 
+            val mSettings = getActivity()?.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+            val editor = mSettings?.edit()
+            editor?.putString(APP_PREFERENCES_CurrentCity, selectCity_spinner?.getSelectedItem().toString())
+            editor?.commit()
             Toast.makeText(
                 activity, "Сохранено",
                 Toast.LENGTH_SHORT).show()
