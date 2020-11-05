@@ -19,6 +19,7 @@ class CelectCityFragment : Fragment(), View.OnClickListener {
     var button1: Button? = null
     val APP_PREFERENCES = "WeatherApp"
     val APP_PREFERENCES_CurrentCity = ""
+    lateinit var likedCities: Array<String>
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -28,17 +29,22 @@ class CelectCityFragment : Fragment(), View.OnClickListener {
         celectCityViewModel = ViewModelProviders.of(this).get(CelectCityViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_selectcity, container, false)
 
-        val likedCities = arrayOf("Москва")
+        likedCities = arrayOf("Москва")
 
         button1 = root.findViewById(R.id.button1) as Button
         button1!!.setOnClickListener(this)
         button = root.findViewById(R.id.selectCity_button) as Button
         button!!.setOnClickListener(this)
 
-        val mArrayAdapter = ArrayAdapter<Any>(requireActivity(), android.R.layout.simple_list_item_1, likedCities) // адаптер списка
-        listView.setAdapter(mArrayAdapter)
+
 
         return root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val mArrayAdapter = ArrayAdapter<Any>(requireActivity(), android.R.layout.simple_list_item_1, likedCities) // адаптер списка
+        listView.setAdapter(mArrayAdapter)
     }
 
     override fun onClick(root: View?) {

@@ -61,8 +61,10 @@ class HomeFragment : Fragment() {
         val request: Request = Request.Builder().url(URL).build()
         okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call?, e: IOException?) {
-                Toast.makeText(activity, getString(R.string.connection_error), Toast.LENGTH_LONG)
-                    .show()
+                activity?.runOnUiThread {
+                    Toast.makeText(activity, getString(R.string.connection_error), Toast.LENGTH_LONG)
+                        .show()
+                }
             }
 
             override fun onResponse(call: Call?, response: Response?) {
