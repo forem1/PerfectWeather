@@ -1,20 +1,33 @@
 package com.example.perfectweather.ui.home
 
+import android.R.attr.name
 import android.content.Context
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.example.perfectweather.BuildConfig
 import com.example.perfectweather.R
+import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.fragment_home.*
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 
+
+@Parcelize
+data class Weather (
+    var weather: String,
+    var weatherDescription: String,
+    var temperature: String,
+    var humidity: String,
+    var pressure: String,
+    var region: String
+): Parcelable
 
 class HomeFragment : Fragment() {
 
@@ -23,13 +36,7 @@ class HomeFragment : Fragment() {
     var okHttpClient: OkHttpClient = OkHttpClient()
     val APP_PREFERENCES = "WeatherApp"
     val APP_PREFERENCES_CurrentCity = ""
-
-    var weather = ""
-    var weatherDescription = ""
-    var temperature = ""
-    var humidity = ""
-    var pressure = ""
-    var region = ""
+    lateinit var weatherParams: Weather
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +51,7 @@ class HomeFragment : Fragment() {
         val URL = "http://api.openweathermap.org/data/2.5/weather?q=" + mSettings?.getString(
             APP_PREFERENCES_CurrentCity,
             ""
-        ) + "&units=metric&lang=ru&APPID=5488ff05b7eba5bf321c854a7843578f";
+        ) + "&units=metric&lang=ru&APPID="+BuildConfig.API_KEY;
         GetAPIData(URL, root)
 
         return root
@@ -62,19 +69,20 @@ class HomeFragment : Fragment() {
                 val json = response?.body()?.string()
 
                 if (JSONObject(json).getString("name") != "") {
-                    weather =
+                    var weather =
                         JSONObject(JSONObject(json).getJSONArray("weather")[0].toString()).getString(
                             "main"
                         )
-                    weatherDescription =
+                    var weatherDescription =
                         JSONObject(JSONObject(json).getJSONArray("weather")[0].toString()).getString(
                             "description"
                         )
-                    temperature =
+                    var temperature =
                         JSONObject(JSONObject(json).getString("main")).getString("temp").split(".")[0]
-                    humidity = JSONObject(JSONObject(json).getString("main")).getString("humidity")
-                    pressure = JSONObject(JSONObject(json).getString("main")).getString("pressure")
-                    region = JSONObject(json).getString("name")
+                    var humidity = JSONObject(JSONObject(json).getString("main")).getString("humidity")
+                    var pressure = JSONObject(JSONObject(json).getString("main")).getString("pressure")
+                    var region = JSONObject(json).getString("name")
+                    weatherParams = Weather(weather, weatherDescription, temperature, humidity, pressure, region)
 
                     getActivity()?.runOnUiThread {
                         textView3.text = region

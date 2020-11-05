@@ -5,8 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.perfectweather.R
@@ -29,13 +28,15 @@ class CelectCityFragment : Fragment(), View.OnClickListener {
         celectCityViewModel = ViewModelProviders.of(this).get(CelectCityViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_selectcity, container, false)
 
-        //val likedCities = arrayOf("Москва")
+        val likedCities = arrayOf("Москва")
 
         button1 = root.findViewById(R.id.button1) as Button
         button1!!.setOnClickListener(this)
         button = root.findViewById(R.id.selectCity_button) as Button
         button!!.setOnClickListener(this)
 
+        val mArrayAdapter = ArrayAdapter<Any>(requireActivity(), android.R.layout.simple_list_item_1, likedCities) // адаптер списка
+        listView.setAdapter(mArrayAdapter)
 
         return root
     }
