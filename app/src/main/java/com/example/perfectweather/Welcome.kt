@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.Window
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_welcome.*
 
@@ -15,11 +17,15 @@ class Welcome : AppCompatActivity() {
     //val APP_PREFERENCES_CurrentCityPosition = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_welcome)
+        getSupportActionBar()?.hide()
 
         var mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-        textView.text = mSettings.getString(APP_PREFERENCES_CurrentCity, "") //test
 
         if(mSettings.getString(APP_PREFERENCES_CurrentCity, "") != "") {
             val intent = Intent(this, MainActivity::class.java)

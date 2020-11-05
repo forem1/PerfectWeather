@@ -1,6 +1,5 @@
 package com.example.perfectweather.ui.home
 
-import android.R.attr.name
 import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
@@ -80,15 +79,17 @@ class HomeFragment : Fragment() {
                             "description"
                         )
                     var temperature =
-                        JSONObject(JSONObject(json).getString("main")).getString("temp").split(".")[0]
+                        JSONObject(JSONObject(json).getString("main")).getString("temp").split(".")[0] + "°"
                     var humidity = JSONObject(JSONObject(json).getString("main")).getString("humidity")
                     var pressure = JSONObject(JSONObject(json).getString("main")).getString("pressure")
                     var region = JSONObject(json).getString("name")
                     weatherParams = Weather(weather, weatherDescription, temperature, humidity, pressure, region)
 
                     getActivity()?.runOnUiThread {
-                        textView3.text = region
-                        textView4.text = temperature
+                        Region_field.text = weatherParams.region
+                        Temperature_field.text = weatherParams.temperature
+
+
                     }
                 } else Toast.makeText(
                     activity,

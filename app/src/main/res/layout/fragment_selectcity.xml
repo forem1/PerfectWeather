@@ -6,48 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".ui.celectcity.CelectCityFragment">
 
-    <Spinner
-        android:id="@+id/selectCity_spinner"
-        android:layout_width="278dp"
-        android:layout_height="25dp"
-        android:entries="@array/CityNames"
-        app:layout_constraintBottom_toTopOf="@+id/selectCity_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.487">
-
-    </Spinner>
-
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="73dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectCity_spinner"></ListView>
+        android:layout_marginTop="32dp"
+        android:fadeScrollbars="true"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbarDefaultDelayBeforeFade="1000"
+        android:scrollbarFadeDuration="500"
+        android:scrollbarStyle="outsideOverlay"
 
-    <Button
-        android:id="@+id/selectCity_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Welcome_EnterButton"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/selectCity_spinner"
+        app:layout_constraintVertical_bias="0.128"></ListView>
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:text="deleteShare"
+    <Spinner
+        android:id="@+id/selectCity_spinner"
+        android:layout_width="323dp"
+        android:layout_height="20dp"
+        android:entries="@array/CityNames"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectCity_button" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.115">
+
+    </Spinner>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

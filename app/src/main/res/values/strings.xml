@@ -2,7 +2,9 @@
     <string name="app_name">PerfectWeather</string>
     <string name="title_home">Погода</string>
     <string name="title_SelectCity">Выбор города</string>
-    <string name="Welcome_EnterButton">сохранить</string>
+    <string name="Welcome_EnterButton">Сохранить</string>
+    <string name="deleted">Удалено</string>
+    <string name="saved">Сохранено</string>
     <string name="connection_error">Ошибка подключения к серверу</string>
     <string name="connection_error_parse">Ошибка получения данных</string>
 

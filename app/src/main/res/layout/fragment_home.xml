@@ -7,7 +7,7 @@
     tools:context=".ui.home.HomeFragment">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/Region_field"
         android:layout_width="409dp"
         android:layout_height="23dp"
         android:text="Москва"
@@ -19,13 +19,13 @@
         app:layout_constraintVertical_bias="0.314" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/Temperature_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/advent_pro_thin"
         android:text="24°"
         android:textSize="120sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintBottom_toTopOf="@+id/Region_field"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
