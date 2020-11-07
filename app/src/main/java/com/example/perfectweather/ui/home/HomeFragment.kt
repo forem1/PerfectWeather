@@ -1,15 +1,28 @@
 package com.example.perfectweather.ui.home
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
+import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import com.bumptech.glide.Glide
 import com.example.perfectweather.BuildConfig
+import com.example.perfectweather.MainActivity
 import com.example.perfectweather.R
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -66,6 +79,7 @@ class HomeFragment : Fragment() {
                 }
             }
 
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onResponse(call: Call?, response: Response?) {
                 val json = response?.body()?.string()
 
@@ -83,14 +97,45 @@ class HomeFragment : Fragment() {
                     var humidity = JSONObject(JSONObject(json).getString("main")).getString("humidity")
                     var pressure = JSONObject(JSONObject(json).getString("main")).getString("pressure")
                     var region = JSONObject(json).getString("name")
+
                     weatherParams = Weather(weather, weatherDescription, temperature, humidity, pressure, region)
 
                     getActivity()?.runOnUiThread {
                         Region_field.text = weatherParams.region
                         Temperature_field.text = weatherParams.temperature
 
-
+                        when(weather) {
+                            "Thunderstorm" -> {
+                                Glide.with(this@HomeFragment).load(R.drawable.thunder).into(imageView1)
+                                SendNotify("Оставайтесь дома и ничего не бойтесь!", R.drawable.thunder)
+                            }
+                            "Drizzle" -> {
+                                Glide.with(this@HomeFragment).load(R.drawable.rainy).into(imageView1)
+                                SendNotify("Морось", R.drawable.rainy)
+                            }
+                            "Rain" ->  {
+                                Glide.with(this@HomeFragment).load(R.drawable.rainy).into(imageView1)
+                                SendNotify("Не забудте зонт", R.drawable.rainy)
+                            }
+                            "Snow" -> {
+                                Glide.with(this@HomeFragment).load(R.drawable.snowy).into(imageView1)
+                                SendNotify("Время для горячего напитка", R.drawable.snowy)
+                            }
+                            "Clouds" -> {
+                                Glide.with(this@HomeFragment).load(R.drawable.cloudy).into(imageView1)
+                                SendNotify("Облака это не повод грустить", R.drawable.cloudy)
+                            }
+                            "Clear" -> {
+                                Glide.with(this@HomeFragment).load(R.drawable.sunny).into(imageView1)
+                                SendNotify("Какая чудесная погода для прогулки", R.drawable.sunny)
+                            }
+                            "Fog" -> {
+                                Glide.with(this@HomeFragment).load(R.drawable.silent).into(imageView1)
+                                SendNotify("Будьте аккуратнее! Сильный туман", R.drawable.silent)
+                            }
+                        }
                     }
+
                 } else Toast.makeText(
                     activity,
                     getString(R.string.connection_error_parse),
@@ -98,6 +143,25 @@ class HomeFragment : Fragment() {
                 ).show()
             }
         })
+    }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun SendNotify(Text: String, Pic: Int) {
+        val importance = NotificationManager.IMPORTANCE_HIGH
+        val mChannel = NotificationChannel("PerfectChannel", "Напоминание", importance)
+        val notification: Notification = Notification.Builder(requireActivity().getApplicationContext())
+            .setContentTitle(weatherParams.temperature)
+            .setContentText(Text)
+            .setLargeIcon(
+                BitmapFactory.decodeResource(getResources(),
+                Pic))
+            .setSmallIcon(R.drawable.ic_cloud_black_24dp)
+            .setChannelId("PerfectChannel")
+            .build()
+
+        val mNotificationManager =
+            NotificationManagerCompat.from(requireActivity().getApplicationContext())
+        mNotificationManager.createNotificationChannel(mChannel)
+        mNotificationManager.notify(101, notification)
     }
 }

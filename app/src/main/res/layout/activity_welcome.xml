@@ -9,9 +9,9 @@
     <Spinner
         android:id="@+id/Welcome_spinner"
         android:layout_width="271dp"
-        android:layout_height="30dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="156dp"
         android:entries="@array/CityNames"
-        app:layout_constraintBottom_toTopOf="@+id/Welcome_enter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,4 +27,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
