@@ -93,7 +93,7 @@ class HomeFragment : Fragment() {
                             "description"
                         )
                     var temperature =
-                        JSONObject(JSONObject(json).getString("main")).getString("temp").split(".")[0] + "°"
+                        JSONObject(JSONObject(json).getString("main")).getString("temp").split(".")[0]
                     var humidity = JSONObject(JSONObject(json).getString("main")).getString("humidity")
                     var pressure = JSONObject(JSONObject(json).getString("main")).getString("pressure")
                     var region = JSONObject(json).getString("name")
@@ -102,7 +102,10 @@ class HomeFragment : Fragment() {
 
                     getActivity()?.runOnUiThread {
                         Region_field.text = weatherParams.region
-                        Temperature_field.text = weatherParams.temperature
+                        Temperature_field.text = weatherParams.temperature + "°"
+                        WeatherDescription_field.text = weatherParams.weatherDescription
+                        Humidity_field.text = "Влажность: " + weatherParams.humidity + "%"
+                        Pressure_field.text = "Давление: "+weatherParams.pressure + " мм рт. ст."
 
                         when(weather) {
                             "Thunderstorm" -> {
@@ -115,7 +118,7 @@ class HomeFragment : Fragment() {
                             }
                             "Rain" ->  {
                                 Glide.with(this@HomeFragment).load(R.drawable.rainy).into(imageView1)
-                                SendNotify("Не забудте зонт", R.drawable.rainy)
+                                SendNotify("Не забудьте зонт", R.drawable.rainy)
                             }
                             "Snow" -> {
                                 Glide.with(this@HomeFragment).load(R.drawable.snowy).into(imageView1)
